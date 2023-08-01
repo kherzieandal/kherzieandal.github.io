@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE HTML>
 <!--
 	Landed by HTML5 UP
@@ -14,6 +12,27 @@
 		<link rel="stylesheet" href="/assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 	</head>
+	<style>
+		.column {
+		float: left;
+		width: 40%;
+		padding: 1em;
+		margin-left: auto;
+		margin-right: auto;
+		}
+
+		/* Clear floats after image containers */
+		.row::after {
+		content: "";
+		clear: both;
+		display: table;
+		}
+
+		#caption{
+			text-align: center;
+		}
+	</style>
+
 	<body class="is-preload">
 		<div id="page-wrapper">
 
@@ -35,16 +54,37 @@
 				<div id="main" class="wrapper style1">
 					<div class="container">
 						<header class="major">
-							<h2>The Checkerboard Algorithm Explained.</h2>
+							<h2>The Checkerboard Metropolis Algorithm Explained.</h2>
 						</header>
 
 						<!-- Text -->
 							<section>
 								<header>
 									<p>Date created: July 28, 2023</p>
-									<p>Last Updated: July 29, 2023</p>
+									<p>Last Updated: August 1, 2023</p>
 								</header>
-								<p>Sample text</p>
+								<p>In statistical physics, the Ising model assumes that a physical system can simulate magnets. In this model, every molecule possesses a "spin", which can align either upwards or downwards concerning an external magnetic field's direction.</p>
+
+								<div class="row">
+									<div class="column">
+										<img src="/blog/2023/images/metropolis_16_0.5.gif" alt="Metropolis Algorithm" style="width:100%; height:100%;">
+									</div>
+									<div class="column">
+										<img src="/blog/2023/images/checkerboard_16_0.5.gif" alt="Checkerboard Algorithm" style="width:100%; height:100%;">
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="column">
+										<p id="caption">Metropolis Algorithm</p>
+									</div>
+									<div class="column">
+										<p id="caption">Checkerboard Algorithm</p>
+									</div>
+								</div>
+								
+								<h3>References</h3>
+								<p>[1] S. G. Brush, “History of the Lenz-Ising model,” Rev. Mod. Phys., vol. 39, no. 4, pp. 883–893, 1967, doi: 10.1103/RevModPhys.39.883.</p>
 
 								<hr />
 							</section>
