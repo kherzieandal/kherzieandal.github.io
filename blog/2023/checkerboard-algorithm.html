@@ -31,7 +31,26 @@
 		#caption{
 			text-align: center;
 		}
+
+		img.center {
+			display:block; 
+			margin-left: auto; 
+			margin-right: auto; 
+			width: 30%;
+		}
+
+		p.center{
+			text-align: center;
+		}
+
+		p.no_space {
+			margin: 0;
+		}
 	</style>
+
+	<script type="text/javascript"
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
 
 	<body class="is-preload">
 		<div id="page-wrapper">
@@ -63,10 +82,24 @@
 									<p>Date created: July 28, 2023</p>
 									<p>Last Updated: August 1, 2023</p>
 								</header>
-								<p>In statistical physics, the Ising model assumes that a physical system can simulate magnets. In this model, every molecule possesses a "spin", which can align either upwards or downwards concerning an external magnetic field's direction.<br><br>
-								One way to study the critical phenomena — the behavior of the system near a critical point where a phase transition occurs — of the Ising model is through Monte Carlo (MC) simulations. In a Monte Carlo simulation, instead of solving a problem analytically, random numbers are generated to simulate the behavior of a system or process. These random numbers are used as inputs to the mathematical model representing the problem, and the model's response is analyzed statistically.
-
+								<p>In statistical physics, the Ising model assumes that a physical system can simulate magnets. In this model, every molecule possesses a "spin", which can align either upwards or downwards concerning an external magnetic field's direction. We will represent these spins +1 and -1 respectively as shown in the figure below (others represent the alignment as 0 and 1).
 								</p>
+								<div>
+									<img src="/blog/2023/images/ising_10_spins.jpg" alt="10x10 2D Ising model with random spins" class="center">
+									<p class="center">10x10 2D Ising model with random spins</p>
+								</div>
+								<p>
+								One way to study the critical phenomena — the behavior of the system near a critical point where a phase transition occurs — of the Ising model is through Monte Carlo (MC) simulations. In a Monte Carlo simulation, instead of solving a problem analytically, random numbers are generated to simulate the behavior of a system or process. These random numbers are used as inputs to the mathematical model representing the problem, and the model's response is analyzed statistically.
+								</p>
+								<div class="no_space">
+									<p class="no_space">A type of Monte carlo Simulation is the Metropolis Algorithm. The pseudocode is as follows:</p>
+									<ol>
+										<li>Choose an initial state \(S(0)=(S_1,\ldots,S_N)\)</li>
+										<li>Choose an \(i\) randomly or sequentially and calculate \(\Delta E=-2S_ih_i\)</li>
+										<li>If \(\Delta E\geq 0\), then flip the spin, \(S_i \to -S_i\). If \(\Delta E < 0 \), draw a uniformly distributed random number \(r\in[0,1]\). If \(r < e^{\Delta E / k_B T}\), flip the spin, $S_i\to-S_i$, otherwise take the old configuration into account once more.</li>
+										<li>Iterate 2 and 3.</li>
+									</ol>
+								</div>
 
 								<div class="row">
 									<div class="column">
@@ -85,11 +118,11 @@
 										<p id="caption">Checkerboard Algorithm</p>
 									</div>
 								</div>
-								
 								<h3>References</h3>
 								<p>
 									[1] S. G. Brush, “History of the Lenz-Ising model,” Rev. Mod. Phys., vol. 39, no. 4, pp. 883–893, 1967, doi: 10.1103/RevModPhys.39.883.<br>
-									[2] H. Gould and J. Tobochnik, Statistical and Thermal Physics: With Computer Applications. Princeton University Press, 2010.
+									[2] H. Gould and J. Tobochnik, Statistical and Thermal Physics: With Computer Applications. Princeton University Press, 2010.<br>
+									[3] M. E. J. Newman and G. T. Barkema, Monte Carlo methods in statistical physics. Oxford University Press, 1999.
 								</p>
 
 								<hr />
@@ -119,6 +152,6 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
 	</body>
+
 </html>
