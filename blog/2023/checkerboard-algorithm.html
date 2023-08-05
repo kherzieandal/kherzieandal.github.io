@@ -43,8 +43,19 @@
 			text-align: center;
 		}
 
-		p.no_space {
+		.no_space {
 			margin: 0;
+			padding: 0;
+		}
+
+		ol.nospace{
+			margin-left:
+			margin-bottom: 0;
+		}
+
+		li.shuffle_left{
+			margin-left: 2em;
+			padding: 0.25em;
 		}
 	</style>
 
@@ -92,14 +103,22 @@
 								One way to study the critical phenomena — the behavior of the system near a critical point where a phase transition occurs — of the Ising model is through Monte Carlo (MC) simulations. In a Monte Carlo simulation, instead of solving a problem analytically, random numbers are generated to simulate the behavior of a system or process. These random numbers are used as inputs to the mathematical model representing the problem, and the model's response is analyzed statistically.
 								</p>
 								<div class="no_space">
-									<p class="no_space">A type of Monte carlo Simulation is the Metropolis Algorithm. The pseudocode is as follows:</p>
-									<ol>
-										<li>Choose an initial state \(S(0)=(S_1,\ldots,S_N)\)</li>
-										<li>Choose an \(i\) randomly or sequentially and calculate \(\Delta E=-2S_ih_i\)</li>
-										<li>If \(\Delta E\geq 0\), then flip the spin, \(S_i \to -S_i\). If \(\Delta E < 0 \), draw a uniformly distributed random number \(r\in[0,1]\). If \(r < e^{\Delta E / k_B T}\), flip the spin, \(S_i\to-S_i\), otherwise take the old configuration into account once more.</li>
-										<li>Iterate 2 and 3.</li>
+									<p class="no_space">A type of Monte Carlo Simulation is the Metropolis Algorithm. The pseudocode is as follows:</p>
+									<hr class="no_space">
+									<ol class="no_space">
+										<li class="shuffle_left">Choose an initial state \(S(0)=(S_1,\ldots,S_N)\)</li>
+										<li class="shuffle_left">Choose an \(i\) randomly or sequentially and calculate \(\Delta E=-2S_ih_i\)</li>
+										<li class="shuffle_left">If \(\Delta E\geq 0\), then flip the spin, \(S_i \to -S_i\). If \(\Delta E < 0 \), draw a uniformly distributed random number \(r\in[0,1]\). If \(r < e^{\Delta E / k_B T}\), flip the spin, \(S_i\to-S_i\), otherwise take the old configuration into account once more.</li>
+										<li class="shuffle_left">Iterate 2 and 3.</li>
 									</ol>
+									<hr class="no_space">
 								</div>
+
+								<br>
+								<p>An implementation in Python is shown below:</p>
+								<pre><code>print("Yes")
+Sample</code>
+								</pre>
 
 								<div class="row">
 									<div class="column">
@@ -109,6 +128,8 @@
 										<img src="/blog/2023/images/checkerboard_16_0.5.gif" alt="Checkerboard Algorithm" style="width:100%; height:100%;">
 									</div>
 								</div>
+
+								
 
 								<div class="row">
 									<div class="column">
@@ -124,7 +145,6 @@
 									[2] H. Gould and J. Tobochnik, Statistical and Thermal Physics: With Computer Applications. Princeton University Press, 2010.<br>
 									[3] M. E. J. Newman and G. T. Barkema, Monte Carlo methods in statistical physics. Oxford University Press, 1999.
 								</p>
-
 								<hr />
 							</section>
 							
