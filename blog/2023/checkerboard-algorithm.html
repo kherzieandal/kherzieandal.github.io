@@ -43,6 +43,10 @@
 			text-align: center;
 		}
 
+		a.center{
+			text-align: center;
+		}
+
 		.no_space {
 			margin: 0;
 			padding: 0;
@@ -56,6 +60,10 @@
 		li.shuffle_left{
 			margin-left: 2em;
 			padding: 0.25em;
+		}
+
+		pre{
+			margin-bottom: 0.25em;
 		}
 	</style>
 
@@ -116,8 +124,70 @@
 
 								<br>
 								<p>An implementation in Python is shown below:</p>
-								<pre><code>-- Work in Progress --</code>
-								</pre>
+								<pre><code>######### MODULES #############
+import numpy as np
+import matplotlib.pyplot as plt
+
+######### VARIABLES #############
+lattice_n = 16 # number of rows
+lattice_m = lattice_n # number of columns
+temp = 0.5 # temperature
+eq_steps = 1000 # Equilibration steps
+J=1 # Interaction constant
+h=0 # External magnetic field
+
+######### FUNCTIONS #############
+def initial_state(N, M):   
+	state = np.random.choice(np.array([-1,1]),size=(N,M))
+	return state
+
+def mc_move(lattice, inv_T):    
+	'''Monte Carlo move using Metropolis algorithm '''
+	n = lattice.shape[0]
+	m = lattice.shape[1]
+	for i in range(n):
+		for j in range(m):
+			# Periodicity for neighbors out of index
+			ipp = (i + 1) if (i + 1) < n else 0
+			jpp = (j + 1) if (j + 1) < m else 0
+			inn = (i - 1) if (i - 1) >= 0 else (n - 1)
+			jnn = (j - 1) if (j - 1) >= 0 else (m - 1)  
+			
+			# Calculate neighbors
+			nb = lattice[ipp,j] + lattice[i,jpp] + lattice[inn,j] + lattice[i,jnn]
+			
+			# Compute energy difference
+			spin =  lattice[i, j]
+			deltaE = -2*spin*(J*nb + h)
+			if deltaE >= 0:
+				lattice[i, j] = -spin
+			elif np.random.rand() < np.exp(deltaE*inv_T):
+				lattice[i, j] = -spin
+	return lattice
+
+def plot_ising(lattice, colorbar=True):
+	# plt.figure(figsize=(12, 9))
+	plt.imshow(lattice, cmap='gray', vmin=-1, vmax=1) 
+	if colorbar == True:
+		plt.colorbar()
+
+######### SIMULATION #############
+inv_T = 1/temp # Inverse temperature
+
+lattice = initial_state(lattice_n, lattice_m) # Initialize the lattice
+initial_lattice = lattice.copy() # Copy lattice for the plotting
+
+# Equilibration
+for i in range(eq_steps):
+	mc_move(lattice, inv_T)
+
+# Plot the lattices
+plot_ising(initial_lattice)
+plt.show()
+plot_ising(lattice)
+plt.show()</code></pre><p class="center"><a href="#">Code Link</a></p>
+
+								<p>When we try to animate the flipping of the Metropolis simulation, it is shown below (left figure).</p>
 
 								<div class="row">
 									<div class="column">
@@ -128,8 +198,6 @@
 									</div>
 								</div>
 
-								
-
 								<div class="row">
 									<div class="column">
 										<p id="caption">Metropolis Algorithm</p>
@@ -138,6 +206,10 @@
 										<p id="caption">Checkerboard Algorithm</p>
 									</div>
 								</div>
+
+								<p>The problem with the Metropolis algorithm is its performance — only a single spin is being flipped at a time. One way to strategize for the performance of the simulation is through parallel computing. Code can be run more quickly and efficiently with the aid of parallel computing. We could implement parallel computing using the multiple cores we have on our CPU. Although, a better option would be through the use of GPU as it allows faster computation. 
+								</p>
+
 								<h3>References</h3>
 								<p>
 									[1] S. G. Brush, “History of the Lenz-Ising model,” Rev. Mod. Phys., vol. 39, no. 4, pp. 883–893, 1967, doi: 10.1103/RevModPhys.39.883.<br>
