@@ -69,6 +69,10 @@
 
 	<script type="text/javascript" id="MathJax-script" async
 		src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		
+		var today = new Date();
+		var date = today.toLocaleString('default', { month: 'long' }) + ' '+today.getDate() + ', ' + today.getFullYear();
+		document.getElementById('date-time').innerHTML=date
 	</script>
 
 	<body class="is-preload">
@@ -99,7 +103,7 @@
 							<section>
 								<header>
 									<p>Date created: July 28, 2023</p>
-									<p>Last Updated: August 1, 2023</p>
+									<p>Last Updated: <span id='date-time'></span></p>
 								</header>
 								<p>In statistical physics, the Ising model assumes that the physical system of magnets can be mathematically represented by a lattice arrangement of molecules. In this model, every molecule possesses a "spin", which can align either upwards or downwards corresponding to the external magnetic field's direction. We will represent these spins +1 and -1 respectively as shown in the figure below (others represent the alignment as 0 and 1).
 								</p>
