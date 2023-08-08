@@ -215,12 +215,20 @@ plt.show()</code></pre><p class="center"><a href="#">Code Link</a></p>
 								<p>The problem with the Metropolis algorithm is its performance — only a single spin is being flipped at a time. One way to strategize for the performance of the simulation is through parallel computing. Code can be run more quickly and efficiently with the aid of parallel computing. We could implement parallel computing using the multiple cores we have on our CPU. Although, a better option would be through the use of GPU as it allows faster computation. 
 								</p>
 
+								<p>To implement parallel computing, we must consider the dependency of each spin — the complexity of parallel computing remains a challenge for every application of it as it requires careful consideration of dependencies between tasks. If we’re going to update all of the spins at once, it would raise such problems:</p>
+								<ul>
+									<li>The neighboring spins for each iteration may differ, not allowing us to implement a random seed.</li>
+									<li>The calculation of the properties of the model may have inconsistencies and fluctuations.</li>
+								</ul>
+								<p>Thus, the checkerboard algorithm was created. It allows parallel spin updates exclusively within non-interacting domains.</p>
+
 								<h3>References</h3>
 								<p>
 									[1] S. G. Brush, “History of the Lenz-Ising model,” Rev. Mod. Phys., vol. 39, no. 4, pp. 883–893, 1967, doi: 10.1103/RevModPhys.39.883.<br>
 									[2] H. Gould and J. Tobochnik, Statistical and Thermal Physics: With Computer Applications. Princeton University Press, 2010.<br>
 									[3] M. E. J. Newman and G. T. Barkema, Monte Carlo methods in statistical physics. Oxford University Press, 1999.<br>
-									[4] N. Metropolis, A. W. Rosenbluth, M. N. Rosenbluth, A. H. Teller, and E. Teller, “Equation of state calculations by fast computing machines,” J. Chem. Phys., vol. 21, no. 6, pp. 1087–1092, Jun. 1953, doi: 10.1063/1.1699114.
+									[4] N. Metropolis, A. W. Rosenbluth, M. N. Rosenbluth, A. H. Teller, and E. Teller, “Equation of state calculations by fast computing machines,” J. Chem. Phys., vol. 21, no. 6, pp. 1087–1092, Jun. 1953, doi: 10.1063/1.1699114.<br>
+									[5] T. Preis, P. Virnau, W. Paul, and J. J. Schneider, “GPU accelerated Monte Carlo simulation of the 2D and 3D Ising model,” J. Comput. Phys., vol. 228, no. 12, pp. 4468–4477, 2009, doi: 10.1016/j.jcp.2009.03.018.
 								</p>
 								<hr />
 							</section>
