@@ -48,12 +48,11 @@
 		}
 
 		.no_space {
-			margin: 0;
-			padding: 0;
+			margin-bottom: 0.25em;
 		}
 
-		ol.nospace{
-			margin-left:
+		ol.no_space{
+			margin-top: 0;
 			margin-bottom: 0;
 		}
 
@@ -211,12 +210,18 @@ plt.show()</code></pre><p class="center"><a href="#">Code Link</a></p>
 								<p>The problem with the Metropolis algorithm is its performance — only a single spin is being flipped at a time. One way to strategize for the performance of the simulation is through parallel computing. Code can be run more quickly and efficiently with the aid of parallel computing. We could implement parallel computing using the multiple cores we have on our CPU. Although, a better option would be through the use of GPU as it allows faster computation. 
 								</p>
 
-								<p>To implement parallel computing, we must consider the dependency of each spin — the complexity of parallel computing remains a challenge for every application of it as it requires careful consideration of dependencies between tasks. If we’re going to update all of the spins at once, it would raise such problems:</p>
-								<ul>
-									<li>The neighboring spins for each iteration may differ, not allowing us to implement a random seed.</li>
-									<li>The calculation of the properties of the model may have inconsistencies and fluctuations.</li>
+								<p class="no_space">To implement parallel computing, we must consider the dependency of each spin — the complexity of parallel computing remains a challenge for every application of it as it requires careful consideration of dependencies between tasks. If we’re going to update all of the spins at once, it would raise such problems:</p>
+								<ul class="no_space">
+									<li class="shuffle_left">The neighboring spins for each iteration may differ, not allowing us to implement a random seed.</li>
+									<li class="shuffle_left">The calculation of the properties of the model may have inconsistencies and fluctuations.</li>
 								</ul>
-								<p>Thus, the checkerboard algorithm was created. It allows parallel spin updates exclusively within non-interacting domains.</p>
+
+								<br>
+								<p class="no_space">Thus, the checkerboard algorithm was created. It allows parallel spin updates exclusively within non-interacting domains. The pseudocode for the checkerboard algorithm is as follows:</p>
+								<ol class="shuffle_left">
+									<li class="shuffle_left">Populate an \(n\times m/2\) array of random values.</li>
+									<li class="shuffle_left">Update spins on the lattice for the current color using the opposite-colored lattice spin values and the random value array.</li>
+								</ol>
 
 								<h3>References</h3>
 								<p>
