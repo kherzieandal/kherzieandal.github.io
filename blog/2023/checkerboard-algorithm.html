@@ -215,14 +215,49 @@ plt.show()</code></pre><p class="center"><a href="#">Code Link</a></p>
 									<li class="shuffle_left">The neighboring spins for each iteration may differ, not allowing us to implement a random seed.</li>
 									<li class="shuffle_left">The calculation of the properties of the model may have inconsistencies and fluctuations.</li>
 								</ul>
-
-								<br>
 								<p class="no_space">Thus, the checkerboard algorithm was created. It allows parallel spin updates exclusively within non-interacting domains. The pseudocode for the checkerboard algorithm is as follows:</p>
 								<ol class="shuffle_left">
 									<li class="shuffle_left">Populate an \(n\times m/2\) array of random values.</li>
 									<li class="shuffle_left">Update spins on the lattice for the current color using the opposite-colored lattice spin values and the random value array.</li>
 								</ol>
+								<p>For the first step, example of an \(n\times m/2\) array is shown below. The image on the left is the array. When we convert it in the lattice, it would show the right image.</p>
+								
+								<div class="row">
+									<div class="column">
+										<img src="/blog/2023/images/checkerboard_half_lattice_black.png" alt="n by m over 2 array (black lattice). The numbers correspond to the indices." style="width:50%; display:block;  margin-left: auto; margin-right:auto;">
+									</div>
+									<div class="column">
+										<img src="/blog/2023/images/checkerboard_lattice_black_only.png" alt="n by m over 2 array when represented as a black lattice." style="width:100%;">
+									</div>
+								</div>
 
+								<div class="row">
+									<div class="column">
+										<p id="caption">\(n\times m/2\) array (black lattice). The numbers correspond to the indices.</p>
+									</div>
+									<div class="column">
+										<p id="caption">\(n\times m/2\) array when represented as a black lattice.</p>
+									</div>
+								</div>
+								This is also the case for the white lattice:
+								<div class="row">
+									<div class="column">
+										<img src="/blog/2023/images/checkerboard_half_lattice_white.png" alt="n by m over 2 array (white lattice). The numbers correspond to the indices." style="width:50%; display:block;  margin-left: auto; margin-right:auto;">
+									</div>
+									<div class="column">
+										<img src="/blog/2023/images/checkerboard_lattice_white_only.png" alt="n by m over 2 array when represented as a white lattice." style="width:100%;">
+									</div>
+								</div>
+								<div class="row">
+									<div class="column">
+										<p id="caption">\(n\times m/2\) array (white lattice). The numbers correspond to the indices.</p>
+									</div>
+									<div class="column">
+										<p id="caption">\(n\times m/2\) array when represented as a white lattice.</p>
+									</div>
+								</div>
+								Combining the arrays would results to a checkerboard,
+								<img src="/blog/2023//images/checkerboard_lattice.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
 								<h3>References</h3>
 								<p>
 									[1] S. G. Brush, “History of the Lenz-Ising model,” Rev. Mod. Phys., vol. 39, no. 4, pp. 883–893, 1967, doi: 10.1103/RevModPhys.39.883.<br>
