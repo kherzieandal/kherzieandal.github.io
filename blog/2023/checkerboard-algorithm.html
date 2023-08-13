@@ -48,7 +48,8 @@
 		}
 
 		.no_space {
-			margin-bottom: 0.25em;
+			margin-bottom: 0.15em;
+			margin-top: 0.15em;
 		}
 
 		ol.no_space{
@@ -117,7 +118,7 @@
 										<li class="shuffle_left">Choose an initial state \(S(0)=(S_1,\ldots,S_N)\)</li>
 										<li class="shuffle_left">Choose an \(i\) randomly or sequentially and calculate \(\Delta E=-2S_ih_i\)</li>
 										<li class="shuffle_left">If \(\Delta E\geq 0\), then flip the spin, \(S_i \to -S_i\). If \(\Delta E < 0 \), draw a uniformly distributed random number \(r\in[0,1]\). If \(r < e^{\Delta E / k_B T}\), flip the spin, \(S_i\to-S_i\), otherwise take the old configuration into account once more.</li>
-										<li class="shuffle_left">Iterate 2 and 3.</li>
+										<li class="shuffle_left no_space">Iterate 2 and 3.</li>
 									</ol>
 									<hr class="no_space">
 								</div>
@@ -253,14 +254,44 @@ plt.show()</code></pre><p class="center"><a href="#">Code Link</a></p>
 								<p id="caption">Checkerboard Algorithm per update of spins</p>
 
 								<p>The implementation using Python with the help of Numba to implement parallelization, we could run the following simulation.</p>
-				
+								<pre><code>### Work in Progress</code></pre><br>
+
+								<p>Comparing the two simulations side by side, we could see its difference.</p>
+								<div class="row">
+									<div class="column">
+										<img src="/blog/2023/images/metropolis_16_0.5.gif" alt="Metropolis algorithm per update of spins." style="width:100%; display:block;  margin-left: auto; margin-right:auto;">
+									</div>
+									<div class="column">
+										<img src="/blog/2023/images/checkerboard_16_0.5.gif" alt="Checkerboard algorithm per update of spins." style="width:100%;">
+									</div>
+								</div>
+								<div class="row">
+									<div class="column">
+										<p id="caption">Metropolis algorithm per update of spins.</p>
+									</div>
+									<div class="column">
+										<p id="caption">Checkerboard algorithm per update of spins.</p>
+									</div>
+								</div>
+								
+
+								<p>The following results for low lattice sizes (figure shown below) are from our research paper, showing the benefits of parallel computing almost at all lattice sizes. Of course, there are still drawbacks to implementing parallel, but it only happens at a single lattice size and the difference isn’t that high.</p>
+								<img src="/blog/2023//images/performance_comparison_low.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 40%;"><br>
+
+								<p>Increasing the lattice sizes, we see substantial benefit of using the GPU.</p>
+								<img src="/blog/2023//images/performance_comparison_high.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
+								<p id="caption">Checkerboard Algorithm per update of spins</p>
+								<p>To conclude, accelerating the Monte Carlo simulation of the 2D Ising model enables more efficient exploration of the model's behavior, expands the range of system sizes that can be studied, and enhances the study of dynamic properties.</p>
 								<h3>References</h3>
 								<p>
 									[1] S. G. Brush, “History of the Lenz-Ising model,” Rev. Mod. Phys., vol. 39, no. 4, pp. 883–893, 1967, doi: 10.1103/RevModPhys.39.883.<br>
 									[2] H. Gould and J. Tobochnik, Statistical and Thermal Physics: With Computer Applications. Princeton University Press, 2010.<br>
 									[3] M. E. J. Newman and G. T. Barkema, Monte Carlo methods in statistical physics. Oxford University Press, 1999.<br>
 									[4] N. Metropolis, A. W. Rosenbluth, M. N. Rosenbluth, A. H. Teller, and E. Teller, “Equation of state calculations by fast computing machines,” J. Chem. Phys., vol. 21, no. 6, pp. 1087–1092, Jun. 1953, doi: 10.1063/1.1699114.<br>
-									[5] T. Preis, P. Virnau, W. Paul, and J. J. Schneider, “GPU accelerated Monte Carlo simulation of the 2D and 3D Ising model,” J. Comput. Phys., vol. 228, no. 12, pp. 4468–4477, 2009, doi: 10.1016/j.jcp.2009.03.018.
+									[5] T. Preis, P. Virnau, W. Paul, and J. J. Schneider, “GPU accelerated Monte Carlo simulation of the 2D and 3D Ising model,” J. Comput. Phys., vol. 228, no. 12, pp. 4468–4477, 2009, doi: 10.1016/j.jcp.2009.03.018.<br>
+									[6] K. A. G. Andal and R. C. Simon, “Parallel Monte Carlo simulation of the 2D Ising model using CPU and mobile GPU,” in Proceedings of the Samahang Pisika ng Pilipinas, 2023, p. SPP-2023-PA-06. [Online]. Available: https://proceedings.spp-online.org/article/view/SPP-2023-PA-06<br>
+									[7] J. Romero, M. Bisson, M. Fatica, and M. Bernaschi, “High performance implementations of the 2D Ising model on GPUs,” Comput. Phys. Commun., vol. 256, p. 107473, 2020, doi: 10.1016/j.cpc.2020.107473.<br>
+									[8] K. Binder and E. Luijten, “Monte Carlo tests of renormalization-group predictions for critical phenomena in Ising models,” Phys. Rep., vol. 344, no. 4, pp. 179–253, 2001, doi: 10.1016/S0370-1573(00)00127-7.
 								</p>
 								<hr />
 							</section>
