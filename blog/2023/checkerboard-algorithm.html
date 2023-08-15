@@ -133,7 +133,7 @@ import matplotlib.pyplot as plt
 lattice_n = 16 # number of rows
 lattice_m = lattice_n # number of columns
 seed = 1 # Set seed for consistency and reproducibility
-temp = 0.5 # temperature
+temp = 0.5 # temperature (ferromagnetic)
 eq_steps = 1000 # Equilibration steps
 J=1 # Interaction constant
 h=0 # External magnetic field
@@ -143,8 +143,7 @@ def initial_state(N, M):
 	state = np.random.choice(np.array([-1,1]),size=(N,M))
 	return state
 
-def mc_move(lattice, inv_T):    
-	'''Monte Carlo move using Metropolis algorithm '''
+def mc_move(lattice, inv_T):
 	n = lattice.shape[0]
 	m = lattice.shape[1]
 	for i in range(n):
@@ -168,12 +167,13 @@ def mc_move(lattice, inv_T):
 	return lattice
 
 def plot_ising(lattice, colorbar=True):
-	# plt.figure(figsize=(12, 9))
 	plt.imshow(lattice, cmap='gray', vmin=-1, vmax=1) 
 	if colorbar == True:
 		plt.colorbar()
 
 ######### SIMULATION #############
+np.random.seed(seed) # set seed for reproducibility
+
 inv_T = 1/temp # Inverse temperature
 
 lattice = initial_state(lattice_n, lattice_m) # Initialize the lattice
@@ -187,8 +187,7 @@ for i in range(eq_steps):
 plot_ising(initial_lattice)
 plt.show()
 plot_ising(lattice)
-plt.show()</code></pre>
-<p class="center"><a href="#">Code Link</a></p>
+plt.show()</code></pre><br>
 
 								<p>When we try to animate the flipping of the Metropolis simulation, it is shown below.</p>
 
