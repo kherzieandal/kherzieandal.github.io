@@ -258,27 +258,33 @@ plt.show()</code></pre><br>
 								<pre><code>######### MODULES #############
 import numpy as np
 import matplotlib.pyplot as plt
-import numba
+from numba import njit, prange
+import time
 
 ######### VARIABLES #############
-lattice_n = 16 # number of rows
+lattice_n = 512 # number of rows
 lattice_m = lattice_n # number of columns
 seed = 1 # Set seed for consistency and reproducibility
-temp = 0.5 # temperature
-eq_steps = 100 # Equilibration steps
+temp = 0.5 # temperature (ferromagnetic)
+eq_steps = 1000 # Equilibration steps
 J=1 # Interaction constant
 h=0 # External magnetic field
 
 ######### FUNCTIONS #############
+@njit
+def set_seed():
+	np.random.seed(seed)
+
+@njit
 def generate_lattice(N, M):
 	return np.random.choice(np.array([-1,1], dtype=np.int8),size=(N,M))
 
+@njit
 def generate_array(N, M):
 	return np.random.rand(N, M)
 
-@njit(parallel=True, nogil=True)
-def mcmove(lattice, op_lattice, randvals, is_black, inv_temp):    
-	'''Monte Carlo move using Checkerboard algorithm '''
+@njit(parallel=True)
+def mc_move(lattice, op_lattice, randvals, is_black, inv_temp):    
 	n,m = lattice.shape
 	for i in prange(n):
 		for j in prange(m):
@@ -302,11 +308,11 @@ def mcmove(lattice, op_lattice, randvals, is_black, inv_temp):
 			deltaE = -2* spin_i*(J*nn_sum+h)
 			if deltaE >= 0:
 				lattice[i, j] = -spin_i
-			elif randvals[i, j] < math.exp(deltaE*inv_temp):
+			elif randvals[i, j] < np.exp(deltaE*inv_temp):
 				lattice[i, j] = -spin_i
 	return lattice
 
-@njit(parallel=True, nogil=True)
+@njit(parallel=True)
 def combine_lattice(lattice_black, lattice_white):
 	lattice = np.zeros((lattice_n, lattice_m), dtype=np.int8)
 	for i in prange(lattice_n):
@@ -325,29 +331,43 @@ def plot_ising(lattice, colorbar=True):
 		plt.colorbar()
 
 ######### SIMULATION #############
+set_seed() # set seed for reproducibility
+
 lattice_black = generate_lattice(lattice_n, lattice_m//2) # m/2 array for black lattice
 lattice_white = generate_lattice(lattice_n, lattice_m//2) # m/2 array for white lattice
 initial_lattice = combine_lattice(lattice_black, lattice_white).copy() # get a snapshot of initial lattice
 
 inv_temp = 1.0/temp # Inverse temperature
 
+# Compilation
+randvals = generate_array(lattice_n, lattice_m//2)
+mc_move(lattice_black, lattice_white, randvals, True, inv_temp)
+
+randvals = generate_array(lattice_n, lattice_m//2)
+mc_move(lattice_white, lattice_black, randvals, False, inv_temp)
+
 # Equilibration
-print('Starting equilibration...')
+start_time = time.time() # start timer for performance evaluation
 for i in range(eq_steps):
 	randvals = generate_array(lattice_n, lattice_m//2)
-	mcmove(lattice_black, lattice_white, randvals, True, inv_temp)
+	mc_move(lattice_black, lattice_white, randvals, True, inv_temp)
 	
 	randvals = generate_array(lattice_n, lattice_m//2)
-	mcmove(lattice_white, lattice_black, randvals, False, inv_temp)
+	mc_move(lattice_white, lattice_black, randvals, False, inv_temp)
+end_time = time.time() # records end time
+total_time = end_time - start_time
 
 lattice = combine_lattice(lattice_black, lattice_white).copy() # combine black and white lattice
+flips_per_ns = ((lattice_n * lattice_m * eq_steps) / total_time) * 1e-9
+print('Finished simulation for the checkerboard algorithm...')
+print(f'flips/ns: {flips_per_ns}')
 
 # Plot the lattices
 plot_ising(initial_lattice)
 plt.show()
 plot_ising(lattice)
 plt.show()</code></pre>
-<p class="center"><a href="#">Code Link</a></p>
+<p class="center">
 
 								<p>Comparing the two simulations side by side, we could see its difference.</p>
 								<div class="row">
