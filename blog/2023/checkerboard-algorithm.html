@@ -214,7 +214,7 @@ plt.show()</code></pre><br>
 									<li class="shuffle_left">Populate an \(n\times m/2\) array of random values.</li>
 									<li class="shuffle_left">Update spins on the lattice for the current color using the opposite-colored lattice spin values and the random value array.</li>
 								</ol>
-								<p>For the first step, example of an \(n\times m/2\) array is shown below. The image on the left is the array. When we convert it in the lattice, it would show the second image.</p>
+								<p>For the first step, an example of \(n\times m/2\) array is shown below. The image on the left is the array. When we convert it into the lattice, it would show the second image.</p>
 								
 								<div class="row">
 									<div class="column">
@@ -237,12 +237,12 @@ plt.show()</code></pre><br>
 										<p id="caption">\(n\times m/2\) array when represented as a white lattice.</p>
 									</div>
 								</div>
-								<p>Combining the arrays would results to a checkerboard,</p>
+								<p>Combining the arrays would result in a checkerboard,</p>
 								<div class="image fit"  style="margin-left: auto; margin-right: auto; max-width: 330px;">
 									<img  src="/blog/2023//images/checkerboard_lattice.png" alt="">
 								</div>
 
-								<p>For the second step, we’ll update the following with the random values. From the images, the number only represents the indices. The images below shown array of random values. Similar to the metropolis algorithm, we’ll use the metropolis criterion. We’ll first calculate the $\Delta E$ of the spin. If \(\Delta E < 0\), we’ll use the Metropolis criterion \(r < e^{\Delta E/k_BT}\) using the random values we’ve generated.</p>
+								<p>For the second step, we’ll update the following with the random values. From the images, the number only represents the indices. The images below show an array of random values. Similar to the metropolis algorithm, we’ll use the metropolis criterion. We’ll first calculate the $\Delta E$ of the spin. If \(\Delta E < 0\), we’ll use the Metropolis criterion \(r < e^{\Delta E/k_BT}\) using the random values we’ve generated.</p>
 								<div class="image fit" style="margin-left: auto; margin-right: auto; max-width: 330px;">
 									<img  src="/blog/2023//images/checkerboard_random_lattice_black.png" alt="">
 								</div>
@@ -394,12 +394,20 @@ plt.show()</code></pre>
 									<img src="/blog/2023//images/performance_comparison_low.png" alt="">
 								</div>
 
-								<p>Increasing the lattice sizes, we see substantial benefit of using the GPU.</p>
+								<p>Increasing the lattice sizes, we see substantial benefits of using the GPU.</p>
 								<div class="image fit" style="margin-left: auto; margin-right: auto; max-width: 330px;">
 									<img src="/blog/2023//images/performance_comparison_high.png" alt="">
 								</div>
 								<p id="caption">Checkerboard Algorithm per update of spins</p>
 								<p>To conclude, accelerating the Monte Carlo simulation of the 2D Ising model enables more efficient exploration of the model's behavior, expands the range of system sizes that can be studied, and enhances the study of dynamic properties.</p>
+								<h3>Note!!!</h3>
+								<p>Please install the following packages for it to work:</p>
+								<ol>
+									<li>numpy</li>
+									<li>matplotlib</li>
+									<li>numba</li>
+								</ol>
+
 								<h3>References</h3>
 								<p>
 									[1] S. G. Brush, “History of the Lenz-Ising model,” Rev. Mod. Phys., vol. 39, no. 4, pp. 883–893, 1967, doi: 10.1103/RevModPhys.39.883.<br>
