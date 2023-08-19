@@ -21,6 +21,10 @@
 		margin-right: auto;
 		}
 
+		.red{
+			color: lightcoral;
+		}
+
 		/* Clear floats after image containers */
 		.row::after {
 		content: "";
@@ -396,11 +400,11 @@ plt.show()</code></pre>
 
 								<p>Increasing the lattice sizes, we see substantial benefits of using the GPU.</p>
 								<div class="image fit" style="margin-left: auto; margin-right: auto; max-width: 330px;">
-									<img src="/blog/2023//images/performance_comparison_high.png" alt="">
+									<img src="/blog/2023//images/performance_comparison_high.png" alt="Tesla V100-SXM results are from Romero et al. (2020).">
 								</div>
-								<p id="caption">Checkerboard Algorithm per update of spins</p>
+								<p id="caption">Tesla V100-SXM results are from Romero et al. (2020).</p>
 								<p>To conclude, accelerating the Monte Carlo simulation of the 2D Ising model enables more efficient exploration of the model's behavior, expands the range of system sizes that can be studied, and enhances the study of dynamic properties.</p>
-								<h3>Note!!!</h3>
+								<h3 class="red">Note (Package Requirements)!!!</h3>
 								<p>Please install the following packages for it to work:</p>
 								<ol>
 									<li>numpy</li>
