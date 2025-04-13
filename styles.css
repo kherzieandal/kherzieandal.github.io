@@ -1,9 +1,11 @@
 :root {
-    --primary: #3a86ff;
-    --secondary: #8338ec;
+    --primary: #06b6d4;
+    --secondary: #0e7490;
     --light: #f8f9fa;
     --dark: #212529;
     --gray: #6c757d;
+    --code-background: #272822;
+    --code-color: #f8f8f2;
 }
 
 * {
@@ -23,6 +25,16 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
+}
+
+code {
+    background-color: var(--code-background);
+    color: var(--code-color);
+    font-size: small;
+    font-family: "Courier New", Courier, monospace;
+    border-radius: 0.3em;
+    padding: 0.5em;
+    white-space: nowrap;
 }
 
 header {
@@ -75,7 +87,7 @@ nav {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background: linear-gradient(to right, #e9f5ff, #f5f0ff);
+    background: linear-gradient(to right, #f2fcff, #c4f4ff);
 }
 
 .profile-img {
@@ -149,24 +161,12 @@ section h2:after {
 }
 
 .about-content {
+    display: flex;
+    flex-direction: column;
     max-width: 800px;
     margin: 0 auto;
-    text-align: center;
-}
-
-.skills {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.skill-badge {
-    background-color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: justify;
+    gap: 1.5em;
 }
 
 .cards-container {
@@ -210,6 +210,9 @@ section h2:after {
 }
 
 .card-desc {
+    overflow: hidden;
+    height: 65px;
+    font-size: small;
     margin-bottom: 1.5rem;
 }
 
@@ -247,6 +250,11 @@ section h2:after {
     color: var(--gray);
     margin-bottom: 1rem;
     font-size: 0.875rem;
+}
+
+.post-desc {
+    text-align: justify;
+    margin-bottom: 1em;
 }
 
 footer {
