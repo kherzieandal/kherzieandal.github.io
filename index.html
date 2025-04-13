@@ -1,84 +1,269 @@
-<!DOCTYPE HTML>
-<!--
-	Landed by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Kherzie Andal</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	
-		<script type="text/javascript" id="MathJax-script" async
-		src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-		</script>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Kherzie Andal - Personal Portfolio</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <nav>
+                    <a href="#" class="logo">Kherzie Andal</a>
+                    <div class="nav-links">
+                        <a href="#publications" class="active">Publications</a>
+                        <a href="#talks">Talks</a>
+                        <a href="#portfolio">Portfolio</a>
+                        <a href="#blog">Blog Posts</a>
+                    </div>
+                    <div class="menu-toggle">
+                        <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </div>
+                </nav>
+            </div>
+        </header>
 
-	</head>
-	<body class="is-preload landing">
-		<div id="page-wrapper">
+        <section class="hero">
+            <div class="container">
+                <img src="/api/placeholder/180/180" alt="Your Profile Picture" class="profile-img" />
+                <h1>Kherzie Andal</h1>
+                <p class="tagline">Data Professional • Researcher • Developer</p>
+                <div class="social-links">
+                    <a href="https://github.com/kherzieandal" aria-label="GitHub" target="_blank">
+                        <img src="assets/github-mark.svg" width="20" height="20" />
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                            ></path>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+                            ></path>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Email">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                            ></path>
+                        </svg>
+                    </a>
+                </div>
+                <a href="#about" class="btn">Learn More</a>
+            </div>
+        </section>
 
-			<!-- Header -->
-				<header id="header">
-					<h1 id="logo"><a href="index.html">Kherzie Andal</a></h1>
-					<nav id="nav">
-						<ul>
-							<li><a href="#">Home</a></li>
-							<li>
-								<a href="blog.html">Blog</a>
-							</li>
-							<li><a href="#">Work</a>
-								<ul>
-									<li><a href="#">Research</a></li>
-									<li><a href="#">Video Editing</a></li>
-								</ul>
-							</li>
-						</ul>
-					</nav>
-				</header>
+        <section id="about">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <code>Hello, World!</code>
+                    <p>
+                        I’m Kherzie Andal, a data professional and researcher with a deep passion for leveraging data to solve complex challenges. My
+                        work spans from computational research to real-world data analysis that drives decision-making.
+                    </p>
+                    <p>
+                        With expertise in statistical programming, data analytics, and machine learning, I thrive on uncovering insights from data and
+                        turning them into actionable strategies. Whether through academic research or industry collaboration, I aim to contribute
+                        impactful solutions in the field of data science.
+                    </p>
+                    <div class="skills">
+                        <span class="skill-badge">Skill 1</span>
+                        <span class="skill-badge">Skill 2</span>
+                        <span class="skill-badge">Skill 3</span>
+                        <span class="skill-badge">Skill 4</span>
+                        <span class="skill-badge">Skill 5</span>
+                        <span class="skill-badge">Skill 6</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-			<!-- Banner -->
-				<section id="banner">
-					<div class="content">
-						<header>
-							<h2>Hi, I'm Kherzie</h2>
-							<p>I am an undergraduate researcher with a strong focus </br>
-								on GPU and parallel computing in computational physics. </br>
-								My research interests include <b>high performance computing</b>, </br>
-								<b>computational physics</b>, and <b>artificial intelligence.</b></p>
-						</header>
-						<span class="image"><img src="images/profile.jpg" alt="" /></span>
-					</div>
-				</section>
+        <section id="publications">
+            <div class="container">
+                <h2>Featured Publications</h2>
+                <div class="cards-container">
+                    <div class="card">
+                        <img src="/api/placeholder/400/200" alt="Publication 1" class="card-img" />
+                        <div class="card-content">
+                            <h3 class="card-title">Your Publication Title 1</h3>
+                            <p class="card-meta">Journal Name • June 2024</p>
+                            <p class="card-desc">
+                                Brief description of your publication, its significance, and its impact in your field of research.
+                            </p>
+                            <a href="#" class="btn">Read Paper</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="/api/placeholder/400/200" alt="Publication 2" class="card-img" />
+                        <div class="card-content">
+                            <h3 class="card-title">Your Publication Title 2</h3>
+                            <p class="card-meta">Conference Name • March 2024</p>
+                            <p class="card-desc">
+                                Brief description of your publication, its significance, and its impact in your field of research.
+                            </p>
+                            <a href="#" class="btn">Read Paper</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="/api/placeholder/400/200" alt="Publication 3" class="card-img" />
+                        <div class="card-content">
+                            <h3 class="card-title">Your Publication Title 3</h3>
+                            <p class="card-meta">Journal Name • November 2023</p>
+                            <p class="card-desc">
+                                Brief description of your publication, its significance, and its impact in your field of research.
+                            </p>
+                            <a href="#" class="btn">Read Paper</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-			
+        <section id="talks">
+            <div class="container">
+                <h2>Featured Talks</h2>
+                <div class="cards-container">
+                    <div class="card">
+                        <img src="/api/placeholder/400/200" alt="Talk 1" class="card-img" />
+                        <div class="card-content">
+                            <h3 class="card-title">Talk Title 1</h3>
+                            <p class="card-meta">Conference Name • Location • February 2024</p>
+                            <p class="card-desc">Brief overview of the talk, including the main points discussed and the audience impact.</p>
+                            <a href="#" class="btn">Watch Recording</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="/api/placeholder/400/200" alt="Talk 2" class="card-img" />
+                        <div class="card-content">
+                            <h3 class="card-title">Talk Title 2</h3>
+                            <p class="card-meta">Conference Name • Location • October 2023</p>
+                            <p class="card-desc">Brief overview of the talk, including the main points discussed and the audience impact.</p>
+                            <a href="#" class="btn">View Slides</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="/api/placeholder/400/200" alt="Talk 3" class="card-img" />
+                        <div class="card-content">
+                            <h3 class="card-title">Talk Title 3</h3>
+                            <p class="card-meta">Conference Name • Location • May 2023</p>
+                            <p class="card-desc">Brief overview of the talk, including the main points discussed and the audience impact.</p>
+                            <a href="#" class="btn">Watch Recording</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-			<!-- Footer -->
-				<footer id="footer">
-					<ul class="icons">
-						<li><a href="https://www.linkedin.com/in/kherzieandal/" target="_blank" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-						<li><a href="https://www.github.com/kherzieandal" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-						<li><a href="https://www.researchgate.net/profile/Kherzie-Andrei-Andal" target="_blank" class="icon brands alt fa-researchgate"><span class="label">ResearchGate</span></a></li>
-						<li><a href="https://www.behance.net/kherzieandal" target="_blank" class="icon brands alt fa-behance"><span class="label">Behance</span></a></li>
-					</ul>
-					<ul class="copyright">
-						<li>&copy; 2023. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</footer>
+        <section id="portfolio">
+            <div class="container">
+                <h2>Featured Projects</h2>
+                <div class="cards-container">
+                    <div class="card">
+                        <img src="/api/placeholder/400/200" alt="Project 1" class="card-img" />
+                        <div class="card-content">
+                            <h3 class="card-title">Project Name 1</h3>
+                            <p class="card-meta">Technology Stack</p>
+                            <p class="card-desc">Description of the project, including its purpose, your role, and the technologies used.</p>
+                            <a href="#" class="btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="/api/placeholder/400/200" alt="Project 2" class="card-img" />
+                        <div class="card-content">
+                            <h3 class="card-title">Project Name 2</h3>
+                            <p class="card-meta">Technology Stack</p>
+                            <p class="card-desc">Description of the project, including its purpose, your role, and the technologies used.</p>
+                            <a href="#" class="btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="/api/placeholder/400/200" alt="Project 3" class="card-img" />
+                        <div class="card-content">
+                            <h3 class="card-title">Project Name 3</h3>
+                            <p class="card-meta">Technology Stack</p>
+                            <p class="card-desc">Description of the project, including its purpose, your role, and the technologies used.</p>
+                            <a href="#" class="btn">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-		</div>
+        <section id="blog">
+            <div class="container">
+                <h2>Featured Blog Posts</h2>
+                <div class="blog-post">
+                    <h3 class="post-title">Blog Post Title 1</h3>
+                    <p class="post-meta">March 15, 2024 • 5 min read</p>
+                    <p>
+                        Summary of the blog post content. This should be a brief overview that gives readers an idea of what the post is about without
+                        giving away all the details.
+                    </p>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+                <div class="blog-post">
+                    <h3 class="post-title">Blog Post Title 2</h3>
+                    <p class="post-meta">February 27, 2024 • 8 min read</p>
+                    <p>
+                        Summary of the blog post content. This should be a brief overview that gives readers an idea of what the post is about without
+                        giving away all the details.
+                    </p>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+                <div class="blog-post">
+                    <h3 class="post-title">Blog Post Title 3</h3>
+                    <p class="post-meta">January 10, 2024 • 6 min read</p>
+                    <p>
+                        Summary of the blog post content. This should be a brief overview that gives readers an idea of what the post is about without
+                        giving away all the details.
+                    </p>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+            </div>
+        </section>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <h3>Get In Touch</h3>
+                    <p>Feel free to reach out for collaborations, questions, or just to say hello!</p>
+                    <div class="footer-links">
+                        <a href="mailto:your.email@example.com">Email</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">GitHub</a>
+                        <a href="#">Twitter</a>
+                    </div>
+                    <p class="copyright">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>
+                        Kherzie Andal. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
 
-	</body>
+        <script src="scripts.js"></script>
+    </body>
 </html>
