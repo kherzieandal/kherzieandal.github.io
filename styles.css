@@ -171,7 +171,7 @@ section h2:after {
 
 .cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
 }
@@ -271,6 +271,7 @@ footer {
 
 .footer-links {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
     margin: 2rem 0;
@@ -306,8 +307,8 @@ footer {
         padding: 1rem 2rem;
         gap: 1rem;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transform: translateY(-150%);
-        transition: transform 0.3s ease;
+        transform: translateX(150%);
+        transition: transform 0.3s ease-out;
     }
 
     .nav-links.active {
@@ -320,5 +321,9 @@ footer {
 
     .tagline {
         font-size: 1.25rem;
+    }
+
+    .footer-links {
+        gap: 1rem;
     }
 }

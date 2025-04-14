@@ -2,6 +2,9 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const navLinks = document.querySelector(".nav-links");
 
+// Get full year for footer
+document.getElementById("current-year").textContent = new Date().getFullYear();
+
 menuToggle.addEventListener("click", () => {
     navLinks.classList.toggle("active");
 });
@@ -40,9 +43,9 @@ window.addEventListener("scroll", () => {
         const sectionId = section.getAttribute("id");
 
         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            document.querySelector(".nav-links a[href*=" + sectionId + "]").classList.add("active");
+            document.querySelector(".nav-links a[href*=" + sectionId + "]")?.classList.add("active");
         } else {
-            document.querySelector(".nav-links a[href*=" + sectionId + "]").classList.remove("active");
+            document.querySelector(".nav-links a[href*=" + sectionId + "]")?.classList.remove("active");
         }
     });
 });

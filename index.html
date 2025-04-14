@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Kherzie Andal - Personal Portfolio</title>
+
         <link rel="stylesheet" href="styles.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     </head>
@@ -40,7 +41,7 @@
 
         <section class="hero">
             <div class="container">
-                <img src="/assets/images/profile.jpg" class="profile-img" />
+                <img src="/assets/images/profile.webp" class="profile-img" alt="Kherzie Andndal's profile" />
                 <h1>Kherzie Andal</h1>
                 <p class="tagline">Data Professional • Researcher • Developer</p>
                 <div class="social-links">
@@ -100,10 +101,10 @@
                 <h2>Featured Talks</h2>
                 <div class="cards-container">
                     <div class="card">
-                        <img src="/api/placeholder/400/200" alt="Talk 1" class="card-img" />
+                        <img src="/assets/images/talks/2023-07_spp_poster_presentation.webp" alt="Talk 1" class="card-img" />
                         <div class="card-content">
                             <h3 class="card-title">Poster Presentation</h3>
-                            <p class="card-meta">41st SPP Physics Conference • Del Carmen, Siargao Island, • February 2024</p>
+                            <p class="card-meta">41st SPP Physics Conference • Del Carmen, Siargao Island, • July 2023</p>
                             <p class="card-desc">
                                 I presented a poster on our Python-based implementation of the checkerboard Metropolis algorithm, highlighting
                                 performance trade-offs and validation against Onsager’s solution.
@@ -112,7 +113,7 @@
                         </div>
                     </div>
                     <div class="card">
-                        <img src="/api/placeholder/400/200" alt="Talk 2" class="card-img" />
+                        <img src="/assets/images/talks/2022-10_python_3.0_talk.webp" alt="Talk 2" class="card-img" />
                         <div class="card-content">
                             <h3 class="card-title">Python 3.0 Workshop: Parallel Computing</h3>
                             <p class="card-meta">PUP Physics Society • Online • October 2022</p>
@@ -124,7 +125,7 @@
                         </div>
                     </div>
                     <div class="card">
-                        <img src="/api/placeholder/400/200" alt="Talk 3" class="card-img" />
+                        <img src="/assets/images/talks/2021-09_python_code_up_talk.webp" alt="Talk 3" class="card-img" />
                         <div class="card-content">
                             <h3 class="card-title">Code Up: A Python and LaTeX workshop</h3>
                             <p class="card-meta">PUP Physics Society • Online • September 2021</p>
@@ -144,7 +145,7 @@
                 <h2>Featured Projects</h2>
                 <div class="cards-container">
                     <div class="card">
-                        <img src="/api/placeholder/400/200" alt="Project 1" class="card-img" />
+                        <img src="assets/images/projects/proj_2_bellabeat.webp" alt="Project 1" class="card-img" />
                         <div class="card-content">
                             <h3 class="card-title">How Can a Wellness Technology Company Play It Smart?</h3>
                             <p class="card-meta">R • Jupyter Notebooks</p>
@@ -156,7 +157,7 @@
                         </div>
                     </div>
                     <div class="card">
-                        <img src="/api/placeholder/400/200" alt="Project 2" class="card-img" />
+                        <img src="assets/images/projects/proj_1_omdena.webp" alt="Project 2" class="card-img" />
                         <div class="card-content">
                             <h3 class="card-title">
                                 Mapping and Recommending Allocation of Fisheries to Increase Aquatic Production in The Philippines
@@ -202,15 +203,13 @@
                     </div>
                     <p class="copyright">
                         ©
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
+                        <span id="current-year"></span>
                         Kherzie Andal. All rights reserved.
                     </p>
                 </div>
             </div>
         </footer>
 
-        <script src="scripts.js"></script>
+        <script defer src="scripts.js"></script>
     </body>
 </html>
