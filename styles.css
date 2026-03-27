@@ -281,6 +281,60 @@ section h2:after {
     margin-bottom: 1em;
 }
 
+.detail-page {
+    padding: 4rem 0;
+}
+
+.detail-article {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.article-meta {
+    color: var(--gray);
+    margin-bottom: 1.25rem;
+    font-size: 0.95rem;
+}
+
+.article-content p,
+.article-content ul,
+.article-content ol,
+.article-content pre,
+.article-content h3,
+.article-content h4 {
+    margin-bottom: 1rem;
+}
+
+.article-content ul,
+.article-content ol {
+    margin-left: 1.25rem;
+}
+
+.article-content pre {
+    background-color: #0f172a;
+    color: #e2e8f0;
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+.article-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.inline-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
 footer {
     background-color: var(--dark);
     color: white;
@@ -353,5 +407,9 @@ footer {
 
     .footer-links {
         gap: 1rem;
+    }
+
+    .detail-article {
+        padding: 1.25rem;
     }
 }

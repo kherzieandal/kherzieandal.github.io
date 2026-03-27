@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            The Checkerboard Metropolis Algorithm Explained | Kherzie Andal
+        </title>
+
+        <link rel="stylesheet" href="../styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <nav>
+                    <a href="/" class="logo">Kherzie Andal</a>
+                    <div class="nav-links">
+                        <a href="../publications.html">Publications</a>
+                        <a href="../talks.html">Talks</a>
+                        <a href="../portfolio.html">Portfolio</a>
+                        <a href="../blog.html" class="active">Blog Posts</a>
+                    </div>
+                    <div class="menu-toggle">
+                        <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <section class="detail-page">
+            <div class="container">
+                <article class="detail-article">
+                    <h2>The Checkerboard Metropolis Algorithm Explained</h2>
+                    <p class="article-meta">
+                        July 28, 2023 • Ising Model, Physics, GPU, Parallel
+                        Computing
+                    </p>
+
+                    <div class="article-content">
+                        <p>
+                            In statistical physics, the Ising model represents
+                            magnets through a lattice of spins where each spin
+                            can be +1 or -1. The model exhibits a phase
+                            transition in 2D near the critical temperature T_c =
+                            2.269, as shown analytically by Onsager.
+                        </p>
+                        <p>
+                            Monte Carlo simulation is a practical way to study
+                            this system numerically. A common approach is the
+                            Metropolis algorithm, which proposes spin flips and
+                            accepts or rejects them based on the energy
+                            difference and temperature.
+                        </p>
+
+                        <h3>Why Checkerboard Updates?</h3>
+                        <p>
+                            A basic Metropolis update flips one spin at a time,
+                            which can become computationally expensive for large
+                            lattices. Parallelizing spin updates is challenging
+                            because neighboring spins are interdependent.
+                        </p>
+                        <p>
+                            The checkerboard method resolves this by splitting
+                            the lattice into two non-interacting color groups
+                            (black and white), then updating one color at a time
+                            using values from the opposite color. This allows
+                            safe parallel updates.
+                        </p>
+
+                        <h3>Python Example (abbreviated)</h3>
+                        <pre><code>import numpy as np
+from numba import njit, prange
+
+@njit(parallel=True)
+def mc_move(lattice, op_lattice, randvals, is_black, inv_temp):
+    n, m = lattice.shape
+    for i in prange(n):
+        for j in prange(m):
+            # neighbor indexing and Metropolis criterion
+            pass
+    return lattice</code></pre>
+
+                        <h3>Result Summary</h3>
+                        <p>
+                            Parallel checkerboard simulation substantially
+                            improves throughput across most lattice sizes. For
+                            some small cases, overhead can reduce gains, but at
+                            larger scales the parallel approach and GPU
+                            acceleration provide clear performance advantages.
+                        </p>
+
+                        <h3>Package Requirements</h3>
+                        <ol>
+                            <li>numpy</li>
+                            <li>matplotlib</li>
+                            <li>numba</li>
+                        </ol>
+
+                        <h3>Reference</h3>
+                        <p>
+                            Andal, K. A. G., &amp; Simon, R. C. (2023). Parallel
+                            Monte Carlo simulation of the 2D Ising model using
+                            CPU and mobile GPU. Proceedings of the Samahang
+                            Pisika ng Pilipinas.
+                        </p>
+
+                        <div class="inline-links">
+                            <a
+                                class="btn"
+                                href="https://proceedings.spp-online.org/article/view/SPP-2023-PA-06"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                >Open Proceedings Entry</a
+                            >
+                            <a class="btn btn-secondary" href="../blog.html"
+                                >Back to Blog Posts</a
+                            >
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <h3>Get In Touch</h3>
+                    <p>
+                        Feel free to reach out for collaborations, questions, or
+                        just to say hello!
+                    </p>
+                    <div class="footer-links">
+                        <a href="mailto:kherzieandal@gmail.com" target="_blank"
+                            >Email</a
+                        >
+                        <a
+                            href="https://linkedin.com/in/kherzieandal"
+                            target="_blank"
+                            >LinkedIn</a
+                        >
+                        <a
+                            href="https://github.com/kherzieandal"
+                            target="_blank"
+                            >GitHub</a
+                        >
+                        <a
+                            href="https://www.researchgate.net/profile/Kherzie-Andrei-Andal"
+                            target="_blank"
+                            >ResearchGate</a
+                        >
+                    </div>
+                    <p class="copyright">
+                        &copy;
+                        <span id="current-year"></span>
+                        Kherzie Andal. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <script defer src="../scripts.js"></script>
+    </body>
+</html>

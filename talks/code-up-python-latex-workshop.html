@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Portfolio | Kherzie Andal</title>
+        <title>Code Up: A Python and LaTeX workshop | Kherzie Andal</title>
 
-        <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="../styles.css" />
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -17,10 +17,10 @@
                 <nav>
                     <a href="/" class="logo">Kherzie Andal</a>
                     <div class="nav-links">
-                        <a href="publications.html">Publications</a>
-                        <a href="talks.html">Talks</a>
-                        <a href="portfolio.html" class="active">Portfolio</a>
-                        <a href="blog.html">Blog Posts</a>
+                        <a href="../publications.html">Publications</a>
+                        <a href="../talks.html" class="active">Talks</a>
+                        <a href="../portfolio.html">Portfolio</a>
+                        <a href="../blog.html">Blog Posts</a>
                     </div>
                     <div class="menu-toggle">
                         <svg
@@ -42,60 +42,44 @@
             </div>
         </header>
 
-        <section id="portfolio">
+        <section class="detail-page">
             <div class="container">
-                <h2>Projects</h2>
-                <div class="cards-container">
-                    <div class="card">
-                        <img
-                            src="assets/images/projects/proj_2_bellabeat.webp"
-                            alt="Project 1"
-                            class="card-img"
-                        />
-                        <div class="card-content">
-                            <h3 class="card-title">
-                                How Can a Wellness Technology Company Play It
-                                Smart?
-                            </h3>
-                            <p class="card-meta">R • Jupyter Notebooks</p>
-                            <p class="card-desc">
-                                A hypothetical scenario where I’m working at
-                                Bellabeat, a high-tech manufacturer of
-                                health-focused products for women. In this case
-                                study, I’ve analyzed the dataset using R and
-                                created a presentation for stakeholders.
-                            </p>
-                            <a href="portfolio/bellabeat.html" class="btn"
-                                >View Project</a
-                            >
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img
-                            src="assets/images/projects/proj_1_omdena.webp"
-                            alt="Project 2"
-                            class="card-img"
-                        />
-                        <div class="card-content">
-                            <h3 class="card-title">
-                                Mapping and Recommending Allocation of Fisheries
-                                to Increase Aquatic Production in The
-                                Philippines
-                            </h3>
-                            <p class="card-meta">Python (streamlit) • Slack</p>
-                            <p class="card-desc">
-                                This project was conducted by the Omdena Laguna,
-                                Philippines Chapter and led by Heide Mae
-                                Balcera.
-                            </p>
+                <article class="detail-article">
+                    <h2>Code Up: A Python and LaTeX workshop</h2>
+                    <p class="article-meta">
+                        Tutorial Talk • September 21, 2021
+                    </p>
+
+                    <div class="article-content">
+                        <p>
+                            The Code Up workshop was a successful learning event
+                            where I led the Basics of Python session. The
+                            objective was to make Python fundamentals accessible
+                            and practical, especially for participants
+                            interested in scientific research and technical
+                            programming.
+                        </p>
+                        <p>
+                            The session emphasized practical examples,
+                            confidence-building for beginners, and clear
+                            pathways for participants to continue their coding
+                            journey.
+                        </p>
+
+                        <div class="inline-links">
                             <a
-                                href="portfolio/omdena-laguna-chapter.html"
                                 class="btn"
-                                >View Project</a
+                                href="https://www.facebook.com/pupphysoc/posts/pfbid02FkecCG8FTBYAhjfoJ7XEqZKKEdpS2M43r5iNZggebVmJUuF3njymk2oGdbebgPdBl"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                >More Information</a
+                            >
+                            <a class="btn btn-secondary" href="../talks.html"
+                                >Back to Talks</a
                             >
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
         </section>
 
@@ -128,7 +112,7 @@
                         >
                     </div>
                     <p class="copyright">
-                        ©
+                        &copy;
                         <span id="current-year"></span>
                         Kherzie Andal. All rights reserved.
                     </p>
@@ -136,6 +120,6 @@
             </div>
         </footer>
 
-        <script defer src="scripts.js"></script>
+        <script defer src="../scripts.js"></script>
     </body>
 </html>

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            Parallel Monte Carlo simulation of the 2D Ising model using CPU and
+            mobile GPU | Kherzie Andal
+        </title>
+
+        <link rel="stylesheet" href="../styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <nav>
+                    <a href="/" class="logo">Kherzie Andal</a>
+                    <div class="nav-links">
+                        <a href="../publications.html" class="active"
+                            >Publications</a
+                        >
+                        <a href="../talks.html">Talks</a>
+                        <a href="../portfolio.html">Portfolio</a>
+                        <a href="../blog.html">Blog Posts</a>
+                    </div>
+                    <div class="menu-toggle">
+                        <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <section class="detail-page">
+            <div class="container">
+                <article class="detail-article">
+                    <h2>
+                        Parallel Monte Carlo simulation of the 2D Ising model
+                        using CPU and mobile GPU
+                    </h2>
+                    <p class="article-meta">
+                        Proceedings of the Samahang Pisika ng Pilipinas • July
+                        10, 2023
+                    </p>
+
+                    <div class="article-content">
+                        <p>
+                            We implement the checkerboard Metropolis algorithm
+                            utilizing multiple threads and cores from both CPU
+                            and mobile GPU. The computing setup includes an
+                            Intel i5-11400H CPU, 16 GB RAM, and an Nvidia RTX
+                            3050 Laptop GPU, with Python and Jupyter notebooks
+                            used for implementation.
+                        </p>
+                        <p>
+                            The parallel CPU implementation can be up to 390x
+                            faster than the Python interpreter and 2.61x faster
+                            than Python compiled through Numba. A notable
+                            exception appears at N = (20 x 128), where
+                            compiler-based serial execution can temporarily
+                            outperform parallel CPU execution because of
+                            parallel overhead.
+                        </p>
+                        <p>
+                            For low lattice sizes, the parallel CPU
+                            implementation is more efficient, with speedups up
+                            to 7.70x over mobile GPU when the GPU is
+                            underutilized. For high lattice sizes, the mobile
+                            GPU reaches up to 11.97x speedup over parallel CPU.
+                            Both approaches eventually hit memory limits at very
+                            high lattice sizes.
+                        </p>
+                        <p>
+                            After equilibration, average magnetization is
+                            compared to Onsager's analytical solution to
+                            validate simulation accuracy.
+                        </p>
+
+                        <h3>Citation</h3>
+                        <p>
+                            Andal, K. A. G., &amp; Simon, R. C. (2023). Parallel
+                            Monte Carlo simulation of the 2D Ising model using
+                            CPU and mobile GPU. In Proceedings of the Samahang
+                            Pisika ng Pilipinas, vol. 41.
+                        </p>
+
+                        <div class="inline-links">
+                            <a
+                                class="btn"
+                                href="https://proceedings.spp-online.org/article/view/SPP-2023-PA-06"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                >Open Paper</a
+                            >
+                            <a
+                                class="btn btn-secondary"
+                                href="../publications.html"
+                                >Back to Publications</a
+                            >
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <h3>Get In Touch</h3>
+                    <p>
+                        Feel free to reach out for collaborations, questions, or
+                        just to say hello!
+                    </p>
+                    <div class="footer-links">
+                        <a href="mailto:kherzieandal@gmail.com" target="_blank"
+                            >Email</a
+                        >
+                        <a
+                            href="https://linkedin.com/in/kherzieandal"
+                            target="_blank"
+                            >LinkedIn</a
+                        >
+                        <a
+                            href="https://github.com/kherzieandal"
+                            target="_blank"
+                            >GitHub</a
+                        >
+                        <a
+                            href="https://www.researchgate.net/profile/Kherzie-Andrei-Andal"
+                            target="_blank"
+                            >ResearchGate</a
+                        >
+                    </div>
+                    <p class="copyright">
+                        &copy;
+                        <span id="current-year"></span>
+                        Kherzie Andal. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <script defer src="../scripts.js"></script>
+    </body>
+</html>
