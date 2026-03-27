@@ -231,6 +231,30 @@ section h2:after {
     background-color: var(--secondary);
 }
 
+.btn.btn-secondary {
+    background-color: white;
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+}
+
+.btn.btn-secondary:hover {
+    background-color: #e8f7fb;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.9rem;
+}
+
+.hero-cta-note {
+    color: #315a66;
+    font-size: 0.95rem;
+}
+
 .blog-post {
     margin-bottom: 2rem;
     padding-bottom: 2rem;
@@ -321,6 +345,10 @@ footer {
 
     .tagline {
         font-size: 1.25rem;
+    }
+
+    .hero-cta-note {
+        font-size: 0.9rem;
     }
 
     .footer-links {

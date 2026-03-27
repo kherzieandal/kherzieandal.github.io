@@ -3,22 +3,26 @@ const menuToggle = document.querySelector(".menu-toggle");
 const navLinks = document.querySelector(".nav-links");
 
 // Get full year for footer
-document.getElementById("current-year").textContent = new Date().getFullYear();
+const currentYear = document.getElementById("current-year");
+if (currentYear) {
+    currentYear.textContent = new Date().getFullYear();
+}
 
-menuToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-});
+if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+    });
+}
 
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
-        e.preventDefault();
-
         const targetId = this.getAttribute("href");
         if (targetId === "#") return;
 
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
+            e.preventDefault();
             window.scrollTo({
                 top: targetElement.offsetTop - 80,
                 behavior: "smooth"
@@ -26,7 +30,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         }
 
         // Close mobile menu if open
-        if (navLinks.classList.contains("active")) {
+        if (navLinks && navLinks.classList.contains("active")) {
             navLinks.classList.remove("active");
         }
     });
