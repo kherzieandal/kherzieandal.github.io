@@ -12,7 +12,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        sans-serif;
 }
 
 body {
@@ -321,12 +325,88 @@ section h2:after {
     padding: 1rem;
     overflow-x: auto;
     white-space: pre;
+    position: relative;
+}
+
+.article-content pre.copy-enabled {
+    padding-top: 2.6rem;
+}
+
+.article-content pre code {
+    display: block;
+    background: transparent;
+    padding: 0;
+    white-space: pre;
+}
+
+.article-content pre code.hljs {
+    background: transparent;
+    padding: 0;
+}
+
+.article-content .code-copy-btn {
+    position: absolute;
+    top: 0.65rem;
+    right: 0.65rem;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: rgba(15, 23, 42, 0.75);
+    color: #e2e8f0;
+    font-size: 0.78rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.article-content .code-copy-btn:hover {
+    background: rgba(30, 41, 59, 0.95);
+    border-color: rgba(148, 163, 184, 0.65);
+}
+
+.article-content .code-copy-btn.copied {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.5);
+    color: #a7f3d0;
+}
+
+.article-content figure {
+    max-width: 680px;
+    margin: 2rem auto;
+}
+
+.article-content .figure-row {
+    max-width: 900px;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.article-content .figure-row figure {
+    max-width: none;
+    margin: 0;
 }
 
 .article-content img {
+    display: block;
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+.article-content figcaption {
+    margin-top: 0.7rem;
+    color: #6b7280;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    text-align: center;
+    font-style: italic;
+    letter-spacing: 0.01em;
 }
 
 .inline-links {
@@ -411,5 +491,16 @@ footer {
 
     .detail-article {
         padding: 1.25rem;
+    }
+
+    .article-content figure {
+        max-width: 100%;
+        margin: 1.5rem auto;
+    }
+
+    .article-content .figure-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin: 1.5rem auto;
     }
 }

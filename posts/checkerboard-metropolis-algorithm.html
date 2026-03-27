@@ -10,6 +10,10 @@
         <link rel="stylesheet" href="../styles.css" />
         <link
             rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+        />
+        <link
+            rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         />
     </head>
@@ -55,55 +59,316 @@
 
                     <div class="article-content">
                         <p>
-                            In statistical physics, the Ising model represents
-                            magnets through a lattice of spins where each spin
-                            can be +1 or -1. The model exhibits a phase
-                            transition in 2D near the critical temperature T_c =
-                            2.269, as shown analytically by Onsager.
+                            In statistical physics, the Ising model treats a
+                            magnet as a lattice of interacting spins. Each spin
+                            can be in one of two states: +1 (up) or -1 (down).
+                            Even this minimal model captures important
+                            collective behavior, including the
+                            paramagnetic-ferromagnetic phase transition.
                         </p>
                         <p>
-                            Monte Carlo simulation is a practical way to study
-                            this system numerically. A common approach is the
-                            Metropolis algorithm, which proposes spin flips and
-                            accepts or rejects them based on the energy
-                            difference and temperature.
+                            For 2D lattices with nearest-neighbor interactions
+                            and no external field, the critical temperature is
+                            known analytically from Onsager's solution,
+                            <strong>T<sub>c</sub> = 2.269</strong> (for k<sub
+                                >B</sub
+                            >
+                            = J = 1). Near this point, fluctuations become large
+                            and simulations are essential for studying
+                            finite-size behavior.
                         </p>
 
-                        <h3>Why Checkerboard Updates?</h3>
+                        <figure>
+                            <img
+                                src="checkerboard-metropolis-algorithm/ising_10_spins.jpg"
+                                alt="10x10 Ising lattice with random spin alignment"
+                            />
+                            <figcaption>
+                                A 10x10 2D Ising model with randomly initialized
+                                spins.
+                            </figcaption>
+                        </figure>
+
+                        <h3>Metropolis Sampling for the Ising Model</h3>
                         <p>
-                            A basic Metropolis update flips one spin at a time,
-                            which can become computationally expensive for large
-                            lattices. Parallelizing spin updates is challenging
-                            because neighboring spins are interdependent.
-                        </p>
-                        <p>
-                            The checkerboard method resolves this by splitting
-                            the lattice into two non-interacting color groups
-                            (black and white), then updating one color at a time
-                            using values from the opposite color. This allows
-                            safe parallel updates.
+                            A standard way to probe Ising dynamics is Monte
+                            Carlo simulation using the Metropolis algorithm. At
+                            each spin site, we compute the energy difference
+                            associated with a tentative flip and apply the
+                            acceptance rule based on temperature.
                         </p>
 
-                        <h3>Python Example (abbreviated)</h3>
-                        <pre><code>import numpy as np
+                                <pre><code class="language-text">1. Choose an initial state S(0) = (S_1, ..., S_N)
+2. Select a site i and compute DeltaE = -2 S_i h_i
+3. If DeltaE >= 0, accept the flip S_i -> -S_i
+4. If DeltaE < 0, draw r in [0, 1]
+   Accept if r < exp(DeltaE / (k_B T)); otherwise reject
+5. Repeat until equilibrium and sampling criteria are met</code></pre>
+
+                        <p>
+                            A direct implementation updates one spin at a time.
+                            This is simple and correct, but throughput becomes a
+                            bottleneck for larger lattices or many Monte Carlo
+                            sweeps.
+                        </p>
+
+                        <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from numba import njit
+import time
+
+lattice_n = 512
+lattice_m = lattice_n
+seed = 1
+temp = 0.5
+eq_steps = 1000
+J = 1
+h = 0
+
+@njit
+def initial_state(N, M):
+    return np.random.choice(np.array([-1, 1]), size=(N, M))
+
+@njit
+def mc_move(lattice, inv_T):
+    n = lattice.shape[0]
+    m = lattice.shape[1]
+    for i in range(n):
+        for j in range(m):
+            ipp = (i + 1) if (i + 1) < n else 0
+            jpp = (j + 1) if (j + 1) < m else 0
+            inn = (i - 1) if (i - 1) >= 0 else (n - 1)
+            jnn = (j - 1) if (j - 1) >= 0 else (m - 1)
+
+            nb = lattice[ipp, j] + lattice[i, jpp] + lattice[inn, j] + lattice[i, jnn]
+            spin = lattice[i, j]
+            deltaE = -2 * spin * (J * nb + h)
+
+            if deltaE >= 0:
+                lattice[i, j] = -spin
+            elif np.random.rand() < np.exp(deltaE * inv_T):
+                lattice[i, j] = -spin
+    return lattice</code></pre>
+
+                        <figure>
+                            <img
+                                src="checkerboard-metropolis-algorithm/metropolis_16_0.5.gif"
+                                alt="Metropolis simulation showing one-spin updates"
+                            />
+                            <figcaption>
+                                Metropolis simulation with sequential spin
+                                updates.
+                            </figcaption>
+                        </figure>
+
+                        <h3>Why Checkerboard Decomposition?</h3>
+                        <p>
+                            Naively updating all spins in parallel is unsafe
+                            because neighboring spins depend on one another.
+                            Simultaneous writes can introduce race conditions
+                            and inconsistent local environments.
+                        </p>
+                        <p>
+                            Checkerboard decomposition solves this by splitting
+                            the lattice into two disjoint sub-lattices (black
+                            and white), analogous to a chessboard pattern. Since
+                            each black spin only neighbors white spins (and vice
+                            versa), one color can be updated in parallel while
+                            reading from the opposite color.
+                        </p>
+
+                        <div class="figure-row">
+                            <figure>
+                                <img
+                                    src="checkerboard-metropolis-algorithm/checkerboard_half_lattice_black.png"
+                                    alt="Half-lattice indexing for black sites"
+                                />
+                                <figcaption>
+                                    Black sub-lattice indexing using an n x
+                                    (m/2) storage layout.
+                                </figcaption>
+                            </figure>
+                            <figure>
+                                <img
+                                    src="checkerboard-metropolis-algorithm/checkerboard_half_lattice_white.png"
+                                    alt="Half-lattice indexing for white sites"
+                                />
+                                <figcaption>
+                                    White sub-lattice indexing using an n x
+                                    (m/2) storage layout.
+                                </figcaption>
+                            </figure>
+                        </div>
+
+                        <figure>
+                            <img
+                                src="checkerboard-metropolis-algorithm/checkerboard_lattice.png"
+                                alt="Combined checkerboard lattice"
+                            />
+                            <figcaption>
+                                Combined black and white sub-lattices forming
+                                the checkerboard update pattern.
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <img
+                                src="checkerboard-metropolis-algorithm/checkerboard_lattice_black_only.png"
+                                alt="Black-only checkerboard lattice representation"
+                            />
+                            <figcaption>
+                                Black-site mask shown on the full lattice.
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <img
+                                src="checkerboard-metropolis-algorithm/checkerboard_lattice_white_only.png"
+                                alt="White-only checkerboard lattice representation"
+                            />
+                            <figcaption>
+                                White-site mask shown on the full lattice.
+                            </figcaption>
+                        </figure>
+
+                        <h3>Checkerboard Update Procedure</h3>
+                        <ol>
+                            <li>
+                                Generate random values for one color as an n x
+                                (m/2) array.
+                            </li>
+                            <li>
+                                Update all spins of that color in parallel using
+                                opposite-color neighbor values.
+                            </li>
+                            <li>
+                                Apply the Metropolis criterion on each site:
+                                compute DeltaE and accept/reject per random
+                                draw.
+                            </li>
+                            <li>
+                                Swap colors and repeat to complete one full
+                                sweep.
+                            </li>
+                        </ol>
+
+                        <p>
+                            In practice, this pattern is well suited for
+                            data-parallel execution on multi-core CPUs and GPUs.
+                            The key is preserving correctness while exposing
+                            enough independent work to amortize parallel
+                            overhead.
+                        </p>
+                        <figure>
+                            <img
+                                src="checkerboard-metropolis-algorithm/checkerboard_random_lattice_black.png"
+                                alt="Random values mapped to one checkerboard color"
+                            />
+                            <figcaption>
+                                Example random-value grid used for one color
+                                update in a checkerboard sweep.
+                            </figcaption>
+                        </figure>
+
+                        <h3>Numba-Based Parallel Implementation</h3>
+                        <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
 from numba import njit, prange
+import time
+
+lattice_n = 512
+lattice_m = lattice_n
+seed = 1
+temp = 0.5
+eq_steps = 1000
+J = 1
+h = 0
+
+@njit
+def generate_lattice(N, M):
+    return np.random.choice(np.array([-1, 1], dtype=np.int8), size=(N, M))
+
+@njit
+def generate_array(N, M):
+    return np.random.rand(N, M)
 
 @njit(parallel=True)
 def mc_move(lattice, op_lattice, randvals, is_black, inv_temp):
     n, m = lattice.shape
     for i in prange(n):
         for j in prange(m):
-            # neighbor indexing and Metropolis criterion
-            pass
+            ipp = (i + 1) if (i + 1) < n else 0
+            jpp = (j + 1) if (j + 1) < m else 0
+            inn = (i - 1) if (i - 1) >= 0 else (n - 1)
+            jnn = (j - 1) if (j - 1) >= 0 else (m - 1)
+
+            if is_black:
+                joff = jpp if (i % 2) else jnn
+            else:
+                joff = jnn if (i % 2) else jpp
+
+            nn_sum = op_lattice[inn, j] + op_lattice[i, j] + op_lattice[ipp, j] + op_lattice[i, joff]
+            spin_i = lattice[i, j]
+            deltaE = -2 * spin_i * (J * nn_sum + h)
+
+            if deltaE >= 0:
+                lattice[i, j] = -spin_i
+            elif randvals[i, j] < np.exp(deltaE * inv_temp):
+                lattice[i, j] = -spin_i
     return lattice</code></pre>
 
-                        <h3>Result Summary</h3>
+                        <h3>Performance Takeaway</h3>
                         <p>
-                            Parallel checkerboard simulation substantially
-                            improves throughput across most lattice sizes. For
-                            some small cases, overhead can reduce gains, but at
-                            larger scales the parallel approach and GPU
-                            acceleration provide clear performance advantages.
+                            Side-by-side comparison shows the checkerboard
+                            method generally outperforms single-spin sequential
+                            updates, especially as lattice size grows. For very
+                            small grids, parallel overhead can occasionally
+                            reduce speedup, but the trend favors parallel
+                            updates for practical simulation scales.
+                        </p>
+                        <p>
+                            This aligns with our reported results in
+                            <em
+                                >Proceedings of the Samahang Pisika ng Pilipinas
+                                2023</em
+                            >, where CPU and mobile GPU implementations
+                            benefited from checkerboard-style parallelization.
+                        </p>
+                        <figure>
+                            <img
+                                src="checkerboard-metropolis-algorithm/checkerboard_16_0.5.gif"
+                                alt="Checkerboard Metropolis simulation animation"
+                            />
+                            <figcaption>
+                                Checkerboard Metropolis simulation with
+                                color-wise parallel updates.
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <img
+                                src="checkerboard-metropolis-algorithm/performance_comparison_low.png"
+                                alt="Performance comparison for low lattice sizes"
+                            />
+                            <figcaption>
+                                Performance comparison for low lattice sizes.
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <img
+                                src="checkerboard-metropolis-algorithm/performance_comparison_high.png"
+                                alt="Performance comparison for high lattice sizes"
+                            />
+                            <figcaption>
+                                Performance comparison for high lattice sizes.
+                            </figcaption>
+                        </figure>
+
+                        <h3>Conclusion</h3>
+                        <p>
+                            Accelerating Monte Carlo simulation of the 2D Ising
+                            model enables larger system sizes, longer
+                            simulations, and more robust analysis near critical
+                            points. Checkerboard Metropolis updates provide a
+                            practical route to parallel speedups while retaining
+                            the physical update logic of the original algorithm.
                         </p>
 
                         <h3>Package Requirements</h3>
@@ -113,13 +378,52 @@ def mc_move(lattice, op_lattice, randvals, is_black, inv_temp):
                             <li>numba</li>
                         </ol>
 
-                        <h3>Reference</h3>
-                        <p>
-                            Andal, K. A. G., &amp; Simon, R. C. (2023). Parallel
-                            Monte Carlo simulation of the 2D Ising model using
-                            CPU and mobile GPU. Proceedings of the Samahang
-                            Pisika ng Pilipinas.
-                        </p>
+                        <h3>References</h3>
+                        <ol>
+                            <li>
+                                S. G. Brush, "History of the Lenz-Ising model,"
+                                Rev. Mod. Phys., vol. 39, no. 4, pp. 883-893,
+                                1967, doi: 10.1103/RevModPhys.39.883.
+                            </li>
+                            <li>
+                                H. Gould and J. Tobochnik, Statistical and
+                                Thermal Physics: With Computer Applications.
+                                Princeton University Press, 2010.
+                            </li>
+                            <li>
+                                M. E. J. Newman and G. T. Barkema, Monte Carlo
+                                methods in statistical physics. Oxford
+                                University Press, 1999.
+                            </li>
+                            <li>
+                                N. Metropolis, A. W. Rosenbluth, M. N.
+                                Rosenbluth, A. H. Teller, and E. Teller,
+                                "Equation of state calculations by fast
+                                computing machines," J. Chem. Phys., vol. 21,
+                                no. 6, pp. 1087-1092, 1953, doi:
+                                10.1063/1.1699114.
+                            </li>
+                            <li>
+                                T. Preis, P. Virnau, W. Paul, and J. J.
+                                Schneider, "GPU accelerated Monte Carlo
+                                simulation of the 2D and 3D Ising model," J.
+                                Comput. Phys., vol. 228, no. 12, pp. 4468-4477,
+                                2009, doi: 10.1016/j.jcp.2009.03.018.
+                            </li>
+                            <li>
+                                K. A. G. Andal and R. C. Simon, "Parallel Monte
+                                Carlo simulation of the 2D Ising model using CPU
+                                and mobile GPU," in Proceedings of the Samahang
+                                Pisika ng Pilipinas, 2023, p. SPP-2023-PA-06.
+                            </li>
+                            <li>
+                                J. Romero, M. Bisson, M. Fatica, and M.
+                                Bernaschi, "High performance implementations of
+                                the 2D Ising model on GPUs," Comput. Phys.
+                                Commun., vol. 256, p. 107473, 2020, doi:
+                                10.1016/j.cpc.2020.107473.
+                            </li>
+                        </ol>
 
                         <div class="inline-links">
                             <a
@@ -175,6 +479,8 @@ def mc_move(lattice, op_lattice, randvals, is_black, inv_temp):
             </div>
         </footer>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+        <script defer src="checkerboard-metropolis-algorithm/code-blocks.js"></script>
         <script defer src="../scripts.js"></script>
     </body>
 </html>
